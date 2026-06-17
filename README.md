@@ -4,8 +4,10 @@ A dashboard that predicts harmful algal bloom (HAB) risk for US lakes. Give it
 a lake's nutrient levels, climate readings, and watershed info, and it'll
 estimate chlorophyll-a concentration and tell you which WHO risk band the
 lake falls into safe, caution, warning, or danger.
+---
+## Live App
 
-**Live app:** https://harmful-algal-bloom-prediction-eqstynrfgp3qjlyhbb5yoj.streamlit.app/
+[https://churn-prediction-xhsrebkrpkrfgrcsczir7m.streamlit.app/](https://harmful-algal-bloom-prediction-eqstynrfgp3qjlyhbb5yoj.streamlit.app/)
 ---
 
 ## Why this exists
