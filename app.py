@@ -210,7 +210,7 @@ if model is None:
 # ----------------------------------------------------------------------
 # SIDEBAR — INPUT FORM (used by the Predict tab)
 # ----------------------------------------------------------------------
-st.sidebar.markdown("###Lake Sample Inputs")
+st.sidebar.markdown("Lake Sample Inputs")
 st.sidebar.markdown(
     '<p class="footnote">Enter raw field measurements. Engineered features '
     '(N:P ratio, log transforms, anomalies, interactions) are computed automatically.</p>',
