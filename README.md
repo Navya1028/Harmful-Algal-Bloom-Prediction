@@ -7,17 +7,30 @@ lake falls into safe, caution, warning, or danger.
 ---
 ## Live App
 
-[https://churn-prediction-xhsrebkrpkrfgrcsczir7m.streamlit.app/](https://harmful-algal-bloom-prediction-eqstynrfgp3qjlyhbb5yoj.streamlit.app/)
+https://harmful-algal-bloom-prediction-eqstynrfgp3qjlyhbb5yoj.streamlit.app/
+---
+## Project Objectives
+
+- Predict **chlorophyll-a concentration** using environmental, climatic, and watershed variables.
+- Classify lakes into **Safe, Caution, Warning, and Danger** HAB risk categories based on bloom severity thresholds.
+- Compare multiple machine learning approaches and identify the **best-performing model**.
+- Improve predictive performance through **domain-informed feature engineering**.
+- Provide an **interactive Streamlit dashboard** for real-time bloom risk assessment.
+- Enable users to explore how changes in **nutrient loading, climate conditions, and watershed characteristics** influence HAB risk.
+- Demonstrate how **machine learning can support environmental monitoring, freshwater management, and early-warning systems**.
 ---
 
-## Why this exists
+## Why this project matters
 
-Measuring chlorophyll-a directly means sending someone out to a lake with
-sampling equipment, which doesn't scale to the ~100,000+ lakes across the
-US. But a lot of the variables that drive algal blooms-nutrient runoff,
-temperature, watershed characteristics-are already tracked at a national
-level. This project trains a model on that existing data so you can get a
-reasonable estimate without a field visit.
+- **Harmful algal blooms (HABs)** are becoming increasingly common in lakes and reservoirs due to **nutrient pollution, rising temperatures, and changing watershed conditions**.
+- Severe blooms can release toxins that threaten **drinking water supplies, aquatic ecosystems, recreational activities, local economies, and public health**.
+- Monitoring blooms at scale is challenging because **direct chlorophyll-a measurement requires field sampling, laboratory analysis, and significant operational resources**.
+- Conducting frequent measurements across the **100,000+ lakes in the United States** is often impractical, expensive, and time-consuming.
+- At the same time, many environmental factors that influence bloom formation—such as **nutrient concentrations, climate conditions, and watershed characteristics**—are already collected through large-scale monitoring programs.
+- This project investigates whether **machine learning can leverage these readily available variables to estimate chlorophyll-a concentration and HAB risk**.
+- The model predicts chlorophyll-a levels and classifies lakes into **Safe, Caution, Warning, and Danger** risk categories based on bloom severity thresholds.
+- Rather than replacing laboratory testing, the system is intended as an **early-warning and decision-support tool** that can help identify lakes requiring closer monitoring before severe blooms develop.
+- By combining **environmental science, data analysis, and machine learning**, this project demonstrates how predictive models can support **proactive freshwater ecosystem management and environmental risk assessment**.
 
 ## Dataset
 
