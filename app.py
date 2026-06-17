@@ -23,12 +23,17 @@ MODEL_PATH = os.environ.get(
     "HAB_MODEL_PATH",
     str(pathlib.Path(__file__).parent / "hab_model.pkl")
 )
+PLOTLY_FONT = {
+    "family": "Manrope",
+    "size": 15,
+    "color": "#1A1A1A"
+}
 
 RISK_COLORS = {
-    1: "#2F7D52",   # Safe      - matches palette's algae green
-    2: "#C99A2E",   # Caution   - amber
-    3: "#C97B2E",   # Warning   - burnt orange
-    4: "#A8412F",   # Danger    - brick red
+    1: "#2F6B43",
+    2: "#7A8F47",
+    3: "#C9982D",
+    4: "#B44A3A"
 }
 RISK_RGBA_FAINT = {   # translucent fills for gauge steps (fixes the ValueError)
     1: "rgba(46,139,87,0.22)",
