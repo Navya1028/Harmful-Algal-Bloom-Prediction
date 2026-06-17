@@ -3,7 +3,7 @@
 A dashboard that predicts harmful algal bloom (HAB) risk for US lakes. Give it
 a lake's nutrient levels, climate readings, and watershed info, and it'll
 estimate chlorophyll-a concentration and tell you which WHO risk band the
-lake falls into — safe, caution, warning, or danger.
+lake falls into safe, caution, warning, or danger.
 
 **Live app:** https://harmful-algal-bloom-prediction-eqstynrfgp3qjlyhbb5yoj.streamlit.app/
 ---
@@ -12,8 +12,8 @@ lake falls into — safe, caution, warning, or danger.
 
 Measuring chlorophyll-a directly means sending someone out to a lake with
 sampling equipment, which doesn't scale to the ~100,000+ lakes across the
-US. But a lot of the variables that drive algal blooms — nutrient runoff,
-temperature, watershed characteristics — are already tracked at a national
+US. But a lot of the variables that drive algal blooms-nutrient runoff,
+temperature, watershed characteristics-are already tracked at a national
 level. This project trains a model on that existing data so you can get a
 reasonable estimate without a field visit.
 
@@ -37,14 +37,6 @@ in this repo is the version of that dataset used to train the model here.
 ├── plots/                       # EDA and evaluation charts, also embedded below
 └── README.md
 ```
-
-## Tech stack
-
-- **Model:** CatBoost (gradient boosted trees), compared against Random Forest, XGBoost, LightGBM, and a handful of linear/kernel baselines during development — CatBoost came out on top on held-out test R²
-- **Feature engineering / data prep:** pandas, NumPy
-- **Dashboard:** Streamlit, with Plotly for the charts
-- **Persistence:** joblib for saving the trained pipeline
-- **Deployment:** Streamlit Community Cloud, deploying straight off this repo
 
 ## How the model works
 
@@ -145,18 +137,13 @@ from hab_predictor import HABPredictor
 joblib.dump(hab_predictor, "hab_model.pkl")
 ```
 
-## Deploying
+## Tech stack
 
-GitHub hosts the code, but it can't run Python, so the dashboard won't
-actually be clickable from the repo page alone. Streamlit Community Cloud
-solves that:
-
-1. share.streamlit.io → sign in with GitHub
-2. New app → pick this repo → branch `main` → main file `app.py`
-3. Deploy
-
-You'll get a public URL where people can actually use the sidebar, hit
-Predict, and see the charts update. Every push to `main` redeploys it.
+- **Model:** CatBoost (gradient boosted trees), compared against Random Forest, XGBoost, LightGBM, and a handful of linear/kernel baselines during development — CatBoost came out on top on held-out test R²
+- **Feature engineering / data prep:** pandas, NumPy
+- **Dashboard:** Streamlit, with Plotly for the charts
+- **Persistence:** joblib for saving the trained pipeline
+- **Deployment:** Streamlit Community Cloud, deploying straight off this repo
 
 ## Disclaimer
 
