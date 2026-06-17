@@ -372,11 +372,11 @@ with tab_about:
     st.markdown("""
     <div class="card">
     <h4>What this dashboard does</h4>
-    <p>This tool predicts <b>chlorophyll-a concentration</b> — the standard proxy for
-    harmful algal bloom (HAB) severity — for a lake sample, using a trained
+    <p>This tool predicts <b>chlorophyll-a concentration</b>, the standard proxy for
+    harmful algal bloom (HAB) severity for a lake sample, using a trained
     <b>CatBoost</b> gradient-boosting model. Enter field measurements in the sidebar
     (nutrients, climate, lake geometry, watershed pressure), and the <b>Predict</b> tab
-    will return a risk category aligned to WHO chlorophyll-a thresholds, along with
+    will return a risk category, along with
     supporting charts. The <b>Model Performance</b> tab shows how the model did on
     held-out test data.</p>
     </div>
