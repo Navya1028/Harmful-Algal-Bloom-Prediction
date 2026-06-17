@@ -1,16 +1,3 @@
-"""
-HAB Risk Dashboard
--------------------
-Streamlit dashboard for the Harmful Algal Bloom (HAB) prediction pipeline.
-
-Run with:
-    streamlit run app.py
-
-Expects the trained pipeline at: hab_model.pkl (same folder by default —
-see MODEL_PATH below). hab_predictor.py must sit next to this file — it
-defines the HABPredictor class so joblib can unpickle hab_model.pkl.
-"""
-
 import os
 import joblib
 import numpy as np
@@ -19,10 +6,7 @@ import streamlit as st
 import plotly.graph_objects as go
 
 from hab_predictor import HABPredictor  # noqa: F401  (needed for unpickling)
-
-# ----------------------------------------------------------------------
 # PAGE CONFIG
-# ----------------------------------------------------------------------
 st.set_page_config(
     page_title="HAB Risk Monitor",
     layout="wide",
@@ -209,7 +193,7 @@ model = load_model(MODEL_PATH)
 # ----------------------------------------------------------------------
 st.markdown("""
 <div class="dashboard-header">
-    <p class="dashboard-title">🌊 HAB Risk Monitor</p>
+    <p class="dashboard-title">Harmful ALgal Blooming Risk Monitor</p>
     <p class="dashboard-subtitle">CHLOROPHYLL-A · NUTRIENT LOADING · WHO BLOOM THRESHOLDS — CATBOOST PIPELINE</p>
 </div>
 """, unsafe_allow_html=True)
@@ -226,18 +210,18 @@ if model is None:
 # ----------------------------------------------------------------------
 # SIDEBAR — INPUT FORM (used by the Predict tab)
 # ----------------------------------------------------------------------
-st.sidebar.markdown("### 🧪 Lake Sample Inputs")
+st.sidebar.markdown("###Lake Sample Inputs")
 st.sidebar.markdown(
     '<p class="footnote">Enter raw field measurements. Engineered features '
     '(N:P ratio, log transforms, anomalies, interactions) are computed automatically.</p>',
     unsafe_allow_html=True
 )
 
-with st.sidebar.expander("💧 Water Chemistry", expanded=True):
+with st.sidebar.expander("Water Chemistry", expanded=True):
     NTL = st.number_input("Total Nitrogen — NTL (µg/L)", value=650.0, min_value=0.0, step=10.0)
     PTL = st.number_input("Total Phosphorus — PTL (µg/L)", value=45.0, min_value=0.0, step=1.0)
 
-with st.sidebar.expander("🌡️ Climate", expanded=True):
+with st.sidebar.expander("Climate", expanded=True):
     Tmean = st.number_input("Mean Temperature — Tmean", value=22.0, step=0.5)
     Tmean_YrMean = st.number_input("Annual Mean Temp — Tmean_YrMean", value=18.0, step=0.5)
     Precip = st.number_input("Precipitation — Precip", value=85.0, step=1.0)
