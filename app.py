@@ -324,7 +324,7 @@ with tab_about:
 
     st.markdown("""
     <div class="card">
-    <h4>🚦 Risk Classification System</h4>
+    <h4>Risk Classification System</h4>
     <p>Predictions are converted from log-scale chlorophyll-a back to µg/L, then
     bucketed into four WHO-aligned severity levels:</p>
     </div>
