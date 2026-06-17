@@ -286,7 +286,6 @@ model = load_model(MODEL_PATH)
 st.markdown("""
 <div class="dashboard-header">
     <p class="dashboard-title">Harmful ALgal Blooming Risk Monitor</p>
-    <p class="dashboard-subtitle">CHLOROPHYLL-A · NUTRIENT LOADING · WHO BLOOM THRESHOLDS — CATBOOST PIPELINE</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -525,7 +524,7 @@ with tab_predict:
                         "value": r["Predicted_chla_ugL"],
                     },
                 },
-                title={"text": "WHO Bloom Severity Scale", "font": {"size": 14, "color": "#14211A"}},
+                title={"text": "Bloom Severity Scale", "font": {"size": 14, "color": "#14211A"}},
             ))
             fig.update_layout(height=300, margin=dict(t=50, b=10, l=20, r=20),
                                paper_bgcolor="rgba(0,0,0,0)", font={"color": "#14211A"})
