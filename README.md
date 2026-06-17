@@ -1,15 +1,22 @@
-# HAB Risk Monitor
+## HAB Risk Monitor
 
 A dashboard that predicts harmful algal bloom (HAB) risk for US lakes. Give it
 a lake's nutrient levels, climate readings, and watershed info, and it'll
 estimate chlorophyll-a concentration and tell you which WHO risk band the
 lake falls into safe, caution, warning, or danger.
 ---
-## Live App
+### Dataset
+
+[Estimates of lake nitrogen, phosphorus, and chlorophyll-a concentrations to characterize harmful algal bloom risk across the United States](https://catalog.data.gov/dataset/estimates-of-lake-nitrogen-phosphorus-and-chlorophyll-a-concentrations-to-characterize-har) — published by the EPA (Brehob et al.), built from EPA's National Lakes
+Assessment (NLA) survey data combined with PRISM climate data, NNI nutrient
+inventories, and LakeCat watershed characteristics. `RF_Inputs_Normalized.csv`
+in this repo is the version of that dataset used to train the model here.
+---
+###Live App
 
 https://harmful-algal-bloom-prediction-eqstynrfgp3qjlyhbb5yoj.streamlit.app/
 ---
-## Project Objectives
+###Project Objectives
 
 - Predict **chlorophyll-a concentration** using environmental, climatic, and watershed variables.
 - Classify lakes into **Safe, Caution, Warning, and Danger** HAB risk categories based on bloom severity thresholds.
@@ -20,7 +27,7 @@ https://harmful-algal-bloom-prediction-eqstynrfgp3qjlyhbb5yoj.streamlit.app/
 - Demonstrate how **machine learning can support environmental monitoring, freshwater management, and early-warning systems**.
 ---
 
-## Why this project matters
+### Why this project matters
 
 - **Harmful algal blooms (HABs)** are becoming increasingly common in lakes and reservoirs due to **nutrient pollution, rising temperatures, and changing watershed conditions**.
 - Severe blooms can release toxins that threaten **drinking water supplies, aquatic ecosystems, recreational activities, local economies, and public health**.
@@ -32,14 +39,7 @@ https://harmful-algal-bloom-prediction-eqstynrfgp3qjlyhbb5yoj.streamlit.app/
 - Rather than replacing laboratory testing, the system is intended as an **early-warning and decision-support tool** that can help identify lakes requiring closer monitoring before severe blooms develop.
 - By combining **environmental science, data analysis, and machine learning**, this project demonstrates how predictive models can support **proactive freshwater ecosystem management and environmental risk assessment**.
 
-## Dataset
-
-[Estimates of lake nitrogen, phosphorus, and chlorophyll-a concentrations to characterize harmful algal bloom risk across the United States](https://catalog.data.gov/dataset/estimates-of-lake-nitrogen-phosphorus-and-chlorophyll-a-concentrations-to-characterize-har) — published by the EPA (Brehob et al.), built from EPA's National Lakes
-Assessment (NLA) survey data combined with PRISM climate data, NNI nutrient
-inventories, and LakeCat watershed characteristics. `RF_Inputs_Normalized.csv`
-in this repo is the version of that dataset used to train the model here.
-
-## What's in this repo
+###What's in this repo
 
 ```
 .
@@ -53,7 +53,7 @@ in this repo is the version of that dataset used to train the model here.
 └── README.md
 ```
 
-## How the model works
+### How the model works
 
 Raw lake measurements go through a feature engineering step before hitting
 the model: N:P ratio (nitrogen-limited lakes favor cyanobacteria), log
@@ -79,7 +79,7 @@ cleaning, feature engineering, the train/val/test split, model comparison,
 cross-validation, and the final save step. It's there for reference; the
 dashboard only needs `hab_model.pkl` and `hab_predictor.py` to actually run.
 
-## Charts
+### Charts
 
 **Target distribution and seasonal bloom pattern**
 ![EDA overview](plots/brehob_eda.png)
@@ -117,7 +117,7 @@ dashboard only needs `hab_model.pkl` and `hab_predictor.py` to actually run.
 **SHAP waterfall, single prediction**
 ![SHAP waterfall](plots/shap_waterfall_example.png)
 
-## Running it yourself
+#### Running it yourself
 
 ```bash
 git clone https://github.com/<your-username>/hab-risk-monitor.git
@@ -140,7 +140,7 @@ export HAB_MODEL_PATH=/path/to/hab_model.pkl
 streamlit run app.py
 ```
 
-## Retraining
+### Retraining
 
 If you retrain, keep `HABPredictor` imported from `hab_predictor.py` rather
 than redefined inline in your training script, otherwise the saved pickle
@@ -152,7 +152,7 @@ from hab_predictor import HABPredictor
 joblib.dump(hab_predictor, "hab_model.pkl")
 ```
 
-## Tech stack
+### Tech stack
 
 - **Model:** CatBoost (gradient boosted trees), compared against Random Forest, XGBoost, LightGBM, and a handful of linear/kernel baselines during development — CatBoost came out on top on held-out test R²
 - **Feature engineering / data prep:** pandas, NumPy
