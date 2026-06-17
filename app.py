@@ -39,142 +39,229 @@ RISK_RGBA_FAINT = {   # translucent fills for gauge steps (fixes the ValueError)
 RISK_NAMES = {1: "Safe", 2: "Caution", 3: "Warning", 4: "Danger"}
 RISK_RANGE = {1: "< 10 µg/L", 2: "10–50 µg/L", 3: "50–100 µg/L", 4: "> 100 µg/L"}
 
-# ----------------------------------------------------------------------
-# STYLE
-# ----------------------------------------------------------------------
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:opsz,wght@9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --deep-water: #0A2F22;     /* near-black forest green, header bg */
-    --mid-water: #14543B;      /* main dark green accent */
-    --algae: #2F7D52;          /* lighter green for highlights/safe state */
-    --bloom-amber: #C99A2E;
-    --danger: #A8412F;
-    --foam: #F4F7F4;           /* page background, faint green-white */
-    --ink: #14211A;            /* near-black, slightly green-tinted text */
-    --sediment: #4D5C53;       /* muted green-grey for captions */
+    --deep-water: #082C24;
+    --mid-water: #2F6B43;
+    --algae: #1D4F45;
+    --foam: #F6F7F5;
+    --ink: #1A1A1A;
+    --muted: #52645D;
+    --danger: #B44A3A;
+    --warning: #C9982D;
 }
 
-html, body, [class*="css"]  { font-family: 'Source Sans 3', sans-serif; color: var(--ink); }
+html, body, [class*="css"] {
+    font-family: 'Manrope', sans-serif;
+    color: var(--ink);
+}
 
-.stApp { background-color: var(--foam); }
+.stApp {
+    background-color: var(--foam);
+}
 
-/* Header banner */
+/* HEADER */
+
 .dashboard-header {
-    background: linear-gradient(120deg, var(--deep-water) 0%, var(--mid-water) 65%, #1d6b73 100%);
-    padding: 2.2rem 2.5rem 1.8rem 2.5rem;
-    border-radius: 14px;
-    margin-bottom: 1.6rem;
-    color: var(--foam);
+    background: linear-gradient(
+        120deg,
+        #082C24 0%,
+        #2F6B43 55%,
+        #1D4F45 100%
+    );
+    padding: 2.2rem 2.5rem;
+    border-radius: 20px;
+    margin-bottom: 1.8rem;
+    color: white;
     position: relative;
     overflow: hidden;
 }
+
 .dashboard-header::after {
     content: "";
     position: absolute;
-    right: -40px; top: -40px;
-    width: 220px; height: 220px;
+    right: -60px;
+    top: -60px;
+    width: 260px;
+    height: 260px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(46,139,87,0.25) 0%, transparent 70%);
-}
-.dashboard-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.6rem;
-    font-weight: 700;
-    margin: 0;
-    color: #FFFFFF;
-    letter-spacing: -0.01em;
-}
-.dashboard-subtitle {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    color: #A9D6BC;
-    margin-top: 0.4rem;
-    letter-spacing: 0.02em;
+    background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.08) 0%,
+        transparent 70%
+    );
 }
 
-/* Generic light card on the foam background — always dark ink text */
-.card {
-    background: #FFFFFF;
-    border: 1px solid #DCE6E3;
-    border-radius: 12px;
-    padding: 1.4rem 1.6rem;
-    color: var(--ink);
+.dashboard-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 2.3rem;
+    font-weight: 800;
+    margin: 0;
+    color: white;
+    letter-spacing: -0.03em;
 }
-.card h4 { color: var(--deep-water); margin-top: 0; }
-.card p, .card li { color: var(--ink); }
+
+.dashboard-subtitle {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    margin-top: 0.5rem;
+    letter-spacing: 0.04em;
+}
+
+/* CARDS */
+
+.card {
+    background: white;
+    border: 1px solid #E3E7E4;
+    border-radius: 18px;
+    padding: 1.6rem;
+    color: var(--ink);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.card h4 {
+    color: var(--deep-water);
+    margin-top: 0;
+    font-weight: 700;
+}
+
+.card p,
+.card li {
+    color: var(--ink);
+    line-height: 1.65;
+}
+
+/* LABELS */
 
 .field-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--sediment);
+    font-weight: 700;
+    color: var(--muted);
     margin-bottom: 0.2rem;
 }
 
+/* METRIC CARDS */
+
 .metric-card {
-    background: #FFFFFF;
-    border: 1px solid #DCE6E3;
-    border-left: 4px solid var(--mid-water);
-    border-radius: 10px;
-    padding: 1.1rem 1.3rem;
+    background: white;
+    border: none;
+    border-left: 5px solid var(--mid-water);
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
 }
+
 .metric-card .value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.1rem;
-    font-weight: 700;
+    font-family: 'Manrope', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
     color: var(--deep-water);
 }
+
 .metric-card .label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--sediment);
+    font-weight: 700;
+    color: var(--muted);
 }
 
-/* Risk banner — always white text on a saturated color background */
+/* RISK BANNER */
+
 .risk-banner {
-    border-radius: 12px;
-    padding: 1.4rem 1.8rem;
-    color: #FFFFFF;
-    font-family: 'Cormorant Garamond', serif;
+    border-radius: 18px;
+    padding: 1.5rem 1.8rem;
+    color: white;
+    font-family: 'Manrope', sans-serif;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
-.risk-banner .field-label { color: #FFFFFF; opacity: 0.85; }
-.risk-banner .level { font-size: 2.3rem; font-weight: 700; margin: 0; color: #FFFFFF; }
-.risk-banner .range { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; opacity: 0.95; color: #FFFFFF; }
 
-.section-divider { border-top: 1px solid #D8E2DF; margin: 1.8rem 0 1.2rem 0; }
+.risk-banner .field-label {
+    color: rgba(255,255,255,0.85);
+}
 
-/* Sidebar — dark bg, light text, inputs need readable dark-on-light fields */
-[data-testid="stSidebar"] { background-color: var(--deep-water); }
-[data-testid="stSidebar"] * { color: var(--foam) !important; }
+.risk-banner .level {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin: 0;
+    color: white;
+}
+
+.risk-banner .range {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.95);
+}
+
+/* DIVIDER */
+
+.section-divider {
+    border-top: 1px solid #DCE5DE;
+    margin: 2rem 0 1.5rem 0;
+}
+
+/* SIDEBAR */
+
+[data-testid="stSidebar"] {
+    background: linear-gradient(
+        180deg,
+        #082C24 0%,
+        #0D3A2D 100%
+    );
+}
+
+[data-testid="stSidebar"] * {
+    color: #F6F7F5 !important;
+}
+
 [data-testid="stSidebar"] .stSlider label,
 [data-testid="stSidebar"] .stNumberInput label {
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.78rem !important;
+    font-family: 'Manrope', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.82rem !important;
 }
-/* number input boxes: force dark text on the light input field itself */
+
 [data-testid="stSidebar"] input {
-    color: var(--ink) !important;
-    background-color: #FFFFFF !important;
+    color: #1A1A1A !important;
+    background: white !important;
+    border-radius: 10px !important;
 }
 
-/* Tabs */
-.stTabs [data-baseweb="tab"] { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+/* TABS */
 
-/* Streamlit's own markdown text on the main (light) canvas */
-[data-testid="stMarkdownContainer"] { color: var(--ink); }
+.stTabs [data-baseweb="tab"] {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
 
-.footnote { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--sediment); }
+/* FOOTNOTE */
 
-table { color: var(--ink); }
+.footnote {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* TABLES */
+
+table {
+    color: var(--ink);
+}
+
+[data-testid="stMarkdownContainer"] {
+    color: var(--ink);
+}
+
 </style>
 """, unsafe_allow_html=True)
-
 
 # ----------------------------------------------------------------------
 # MODEL LOADING
